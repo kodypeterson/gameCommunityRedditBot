@@ -44,9 +44,17 @@ module.exports = function(userData){
                     jar: cookieJar
                 });
             }).then(function(contents){
-                resolve();
-            });
+                return reddit.login();
+            }).then(function(){
+                return reddit('/api/compose').post({
+                    api_type: 'json',
+                    subject: 'Reddit Enforcers - GTA Online Crew Rules',
+                    text: storage.getItem('settings').infoAndCopy.gtaOnlineRules.replace(/\\n/g, "\n"),
+                    to: userData.redditUsername
+                });
+            }).then(resolve);
+        } else {
+            resolve();
         }
-        resolve();
     });
 };

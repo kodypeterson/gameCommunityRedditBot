@@ -44,11 +44,12 @@ module.exports = function(message){
                 }else{
                     var command = message.data.subject;
                     var fs = require('fs');
-
-                    if (fs.existsSync('./commands/' + command + '.js')) {
+                    if (fs.existsSync(__dirname + '/commands/' + command + '.js')) {
                         console.log("       - Running " + command);
                         require('./commands/' + command)(message.data.name, message.data.body).then(function(){
                             console.log("       - Marking Message As Read");
+                            return reddit.login();
+                        }).then(function(){
                             return reddit('/api/read_message').post({
                                 id: message.data.name,
                                 api_type: 'json'
@@ -56,10 +57,14 @@ module.exports = function(message){
                         }).then(resolve);
                     } else {
                         console.log("       - Invalid Command");
-                        reddit('/api/comment').post({
-                            api_type: 'json',
-                            text: storage.getItem('settings').infoAndCopy.invalidCommand.replace(/\\n/g, "\n"),
-                            thing_id: message.data.name
+                        reddit.login().then(function(){
+                            return reddit('/api/comment').post({
+                                api_type: 'json',
+                                text: storage.getItem('settings').infoAndCopy.invalidCommand.replace(/\\n/g, "\n"),
+                                thing_id: message.data.name
+                            })
+                        }).then(function(){
+                            return reddit.login()
                         }).then(function(){
                             console.log("       - Marking Message As Read");
                             return reddit('/api/read_message').post({

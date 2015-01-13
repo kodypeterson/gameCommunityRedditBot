@@ -31,7 +31,7 @@ module.exports = function(userData){
                         to: userData.redditUsername
                     });
                 }).then(function(response){
-                    // userData.approved = true;
+                    userData.approved = true;
                     storage.setItem('user-' + userData.redditUsername, userData);
                     return require('./approved')(userData);
                 }).then(function(){

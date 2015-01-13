@@ -6,10 +6,10 @@ module.exports = function(userData){
 
         // Send Minecraft Info
         require('./approvalSteps/flair')(userData).then(function(){
-        //    return require('./approvalSteps/communityRules')(userData)
-        // }).then(function(){
-        //     return require('./approvalSteps/minecraft')(userData)
-        // }).then(function(){
+           return require('./approvalSteps/communityRules')(userData)
+        }).then(function(){
+            return require('./approvalSteps/minecraft')(userData)
+        }).then(function(){
             return require('./approvalSteps/gtaOnline')(userData)
         }).then(resolve);
     });

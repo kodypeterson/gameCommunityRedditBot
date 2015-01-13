@@ -1,5 +1,8 @@
 module.exports = function(){
     return new Promise(function (resolve, reject) {
+        // resolve();
+        // return true;
+
         var ini = require('ini');
         var merge = require('merge');
         var settings = {};
