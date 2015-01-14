@@ -17,7 +17,7 @@ module.exports = function(fullname, args){
         reddit.login().then(function(){
             return reddit('/api/comment').post({
                 api_type: 'json',
-                text: text,
+                text: text+storage.getItem('settings').generalCopy.botFooter.replace(/\\n/g, "\n"),
                 thing_id: fullname
             });
         }).then(function(response){
