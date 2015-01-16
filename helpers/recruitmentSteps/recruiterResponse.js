@@ -65,7 +65,7 @@ module.exports = function(userData){
                 console.log("           - Sending Recruiter Response");
                 reddit('/api/comment').post({
                     api_type: 'json',
-                    text: storage.getItem('settings').recruitmentCopy.invalidRecruiterResponse.replace(/\\n/g, "\n"),
+                    text: 'Your Response: ' + '\n-------\n' + userData.response + '\n-------\n' + storage.getItem('settings').recruitmentCopy.invalidRecruiterResponse.replace(/\\n/g, "\n"),
                     thing_id: userData.fullname
                 }).then(function(response){
                     resolve();
