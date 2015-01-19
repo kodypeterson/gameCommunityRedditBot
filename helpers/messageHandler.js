@@ -10,6 +10,7 @@ module.exports = function(message){
                 };
                 userData.response = message.data.body;
                 userData.fullname = message.data.name;
+                userData.messageFrom = message.data.author;
                 userData.step++;
                 console.log("       - Running Recruitment Step " + userData.step);
                 require('./recruitmentSteps/' + userData.step)(userData).then(function(){
@@ -31,6 +32,7 @@ module.exports = function(message){
                     var userData = storage.getItem('user-' + username);
                     userData.response = message.data.body;
                     userData.fullname = message.data.name;
+                    userData.messageFrom = message.data.author;
                     console.log("       - Running Recruitment Response");
                     require('./recruitmentSteps/recruiterResponse')(userData).then(function(){
                         console.log("       - Marking Message As Read");
@@ -46,7 +48,7 @@ module.exports = function(message){
                     var fs = require('fs');
                     if (fs.existsSync(__dirname + '/commands/' + command + '.js')) {
                         console.log("       - Running " + command);
-                        require('./commands/' + command)(message.data.name, message.data.body).then(function(){
+                        require('./commands/' + command)(message.data.name, message.data.body, message.data.author).then(function(){
                             console.log("       - Marking Message As Read");
                             return reddit.login();
                         }).then(function(){

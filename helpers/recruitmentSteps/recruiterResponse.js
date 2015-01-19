@@ -35,6 +35,22 @@ module.exports = function(userData){
                     storage.setItem('user-' + userData.redditUsername, userData);
                     return require('./approved')(userData);
                 }).then(function(){
+                    var recruiters = storage.getItem('settings').bot.recruitmentApproval;
+                    console.log("       - Sending Other Recruiters Message");
+                    var messages = [];
+                    for(var i in recruiters){
+                        if (userData.messageFrom !== recruiters[i])
+                            console.log("           - " + recruiters[i]);
+                            messages.push(reddit('/api/compose').post({
+                                api_type: 'json',
+                                subject: 'RESPONDED: New Recruit [' + userData.redditUsername + ']',
+                                text: storage.getItem('settings').recruitmentCopy.otherRecruiterResponse.replace('{recruiterUsername}', userData.messageFrom).replace('{status}', '**approved**').replace(/\\n/g, "\n"),
+                                to: recruiters[i]
+                            }));
+                        }
+                    }
+                    return Promise.all(messages);
+                }).then(function(){
                     resolve();
                 });
             } else if (userData.response.toLowerCase() === 'rejected') {
@@ -55,7 +71,23 @@ module.exports = function(userData){
                         text: storage.getItem('settings').recruitmentCopy.rejectedResponse.replace(/\\n/g, "\n"),
                         to: userData.redditUsername
                     });
-                }).then(function(response){
+                }).then(function(){
+                    var recruiters = storage.getItem('settings').bot.recruitmentApproval;
+                    console.log("       - Sending Other Recruiters Message");
+                    var messages = [];
+                    for(var i in recruiters){
+                        if (userData.messageFrom !== recruiters[i])
+                            console.log("           - " + recruiters[i]);
+                            messages.push(reddit('/api/compose').post({
+                                api_type: 'json',
+                                subject: 'RESPONDED: New Recruit [' + userData.redditUsername + ']',
+                                text: storage.getItem('settings').recruitmentCopy.otherRecruiterResponse.replace('{recruiterUsername}', userData.messageFrom).replace('{status}', '**rejected**').replace(/\\n/g, "\n"),
+                                to: recruiters[i]
+                            }));
+                        }
+                    }
+                    return Promise.all(messages);
+                })then(function(response){
                     storage.removeItem('user-' + userData.redditUsername);
                     resolve();
                 });
