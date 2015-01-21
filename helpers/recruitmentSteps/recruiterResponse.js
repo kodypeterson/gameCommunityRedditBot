@@ -39,7 +39,7 @@ module.exports = function(userData){
                     console.log("       - Sending Other Recruiters Message");
                     var messages = [];
                     for(var i in recruiters){
-                        if (userData.messageFrom !== recruiters[i])
+                        if (userData.messageFrom !== recruiters[i]) {}
                             console.log("           - " + recruiters[i]);
                             messages.push(reddit('/api/compose').post({
                                 api_type: 'json',
@@ -76,7 +76,7 @@ module.exports = function(userData){
                     console.log("       - Sending Other Recruiters Message");
                     var messages = [];
                     for(var i in recruiters){
-                        if (userData.messageFrom !== recruiters[i])
+                        if (userData.messageFrom !== recruiters[i]) {
                             console.log("           - " + recruiters[i]);
                             messages.push(reddit('/api/compose').post({
                                 api_type: 'json',
