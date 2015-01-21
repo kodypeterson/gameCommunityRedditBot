@@ -18,6 +18,7 @@ module.exports = function(){
             }).then(function(){
                 resolve();
             }).catch(function(error){
+                if(error) throw error;
                 resolve();
             });
         });
