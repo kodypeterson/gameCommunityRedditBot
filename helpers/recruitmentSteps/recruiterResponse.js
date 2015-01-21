@@ -87,7 +87,7 @@ module.exports = function(userData){
                         }
                     }
                     return Promise.all(messages);
-                })then(function(response){
+                }).then(function(response){
                     storage.removeItem('user-' + userData.redditUsername);
                     resolve();
                 });
