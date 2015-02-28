@@ -22,20 +22,35 @@ jobs.process(JOB_TYPES.checkForUpdates, function(job, done){
             // An update is available
             job.log('Update Available');
             job.log('Shutting Down Kue');
+            console.log('Update Available');
+            console.log('Shutting Down Kue');
+            jobs
+                .create(
+                    JOB_TYPES.sendMessage,
+                    {
+                        title: 'Update Notification',
+                        to: 'kpkody'
+                        body: 'I have just updated myself to v' + body.version,
+                        subject: 'I Have Updated Myself!'
+                    }
+                )
+                .delay(10000)
+                .priority(JOB_PARAMS.sendMessage.priority)
+                .save();
             jobs.shutdown(function(err) {
-                job.log('Kue Shutdown');
-                job.log('Running git pull');
+                console.log('Kue Shutdown');
+                console.log('Running git pull');
                 var exec = require('child_process').exec;
-                exec('git pull', {
+                exec('git fetch --all;git reset --hard origin/master', {
                     cwd: require('path').normalize(__dirname + '/../')
                 }, function(){
                     // command complete
-                    job.log('Installing Dependencies');
+                    console.log('Installing Dependencies');
                     exec('npm install', {
                         cwd: require('path').normalize(__dirname + '/../')
                     }, function(){
                         // command complete
-                        job.log('Update Complete - Restarting');
+                        console.log('Update Complete - Restarting');
                         process.exit(0);     
                     });
                 });

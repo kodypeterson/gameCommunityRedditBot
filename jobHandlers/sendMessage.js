@@ -10,6 +10,9 @@ var kue = require('kue'),
 
 jobs.process(JOB_TYPES.sendMessage, function(job, done){
     job.log('Logging In To Reddit');
+    if (job.data.title === 'Update Notification') {
+        job.data.body += '\n\nChangelog:\n\n*' + require('../changeLogs.json')[require('../package.json').version].join('\n*');
+    }
     reddit.login().then(function(){
         progress(job, jobSteps, 'Login Complete');
         job.log('Sending Message');
