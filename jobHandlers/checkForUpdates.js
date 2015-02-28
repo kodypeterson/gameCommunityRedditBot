@@ -29,7 +29,7 @@ jobs.process(JOB_TYPES.checkForUpdates, function(job, done){
                     JOB_TYPES.sendMessage,
                     {
                         title: 'Update Notification',
-                        to: 'kpkody',
+                        to: '/r/Reddit_Enforcers',
                         body: 'I have just updated myself to v' + body.version,
                         subject: 'I Have Updated Myself!'
                     }
