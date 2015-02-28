@@ -58,7 +58,7 @@ jobs.process(JOB_TYPES.checkForUpdates, function(job, done){
         } else {
             job.log('No Update');
             require('../helpers/reCreateJob')(job);
-            // done();
+            done();
         }
     });
 });
