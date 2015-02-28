@@ -1,3 +1,5 @@
+var Promise = require('bluebird');
+
 module.exports = function(request, cookieJar, url){
     return new Promise(function (resolve, reject) {
         // Send Community Rules

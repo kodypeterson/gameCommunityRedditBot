@@ -1,3 +1,5 @@
+var Promise = require('bluebird');
+
 module.exports = function(request, cookieJar){
     return new Promise(function (resolve, reject) {
         // Send Community Rules
@@ -7,8 +9,8 @@ module.exports = function(request, cookieJar){
                 method: "POST",
                 timeout: (8*1000),
                 json: {
-                    'login': 'RedditEnforcers',
-                    'password': 'Reddit101',
+                    'login': SOCIALCLUB_CONFIG.login.username,
+                    'password': SOCIALCLUB_CONFIG.login.password,
                     '__RequestVerificationToken': token,
                     'rememberme': false
                 },
