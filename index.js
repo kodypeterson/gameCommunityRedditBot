@@ -1,3 +1,4 @@
+require('pmx').init();
 require('./constants');
 
 var kue = require('kue'),
