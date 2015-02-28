@@ -5,7 +5,7 @@
     "1.0.0": [
         "Initial Release"
     ],
-    "2.0.1": [
+    "2.0.2": [
         "Completely rewritten job queue system",
         "Rockstar errors when crew invite is unsuccessful is now notified to revruitment team members",
         "If the user can not be found when attempting to send a GTA crew invite a notification is sent to the recruitment team",

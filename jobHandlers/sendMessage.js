@@ -11,7 +11,7 @@ var kue = require('kue'),
 jobs.process(JOB_TYPES.sendMessage, function(job, done){
     job.log('Logging In To Reddit');
     if (job.data.title === 'Update Notification') {
-        job.data.body += '\n\nChangelog:\n\n*' + (require('../changeLogs.json')[require('../package.json').version] || require('../changeLogs.json').defaults).join('\n*');
+        job.data.body += '\n\nChangelog:\n\n* ' + (require('../changeLogs.json')[require('../package.json').version] || require('../changeLogs.json').defaults).join('\n* ');
     }
     reddit.login().then(function(){
         progress(job, jobSteps, 'Login Complete');
