@@ -12,5 +12,8 @@
         "I can now self update myself based on versioning",
         "Added a question to determine who recruited the recruit applying",
         "New UI to view jobs in the queue and failed jobs"
+    ],
+    "2.0.2": [
+        "Add jennifawennifa & griff2621 to the allowedAuthors list for 'recruitmentTeamResponse' command"
     ]
 }

@@ -112,7 +112,9 @@ global.MESSAGE_PROCESSORS = [
         subject: 're: New Recruit \[',
         processor: 'recruitmentTeamResponse',
         allowedAuthors: [
-            'kpkody'
+            'kpkody',
+            'jennifawennifa',
+            'griff2621'
         ]
     }
 ]
