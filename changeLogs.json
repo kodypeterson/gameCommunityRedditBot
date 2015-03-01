@@ -15,5 +15,8 @@
     ],
     "2.0.2": [
         "Add jennifawennifa & griff2621 to the allowedAuthors list for 'recruitmentTeamResponse' command"
+    ],
+    "2.0.3": [
+        "Fix issue where security violations where being thrown for commands higher in the chain"
     ]
 }

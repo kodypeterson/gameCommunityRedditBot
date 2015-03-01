@@ -1,6 +1,6 @@
 {
   "name": "redditEnforcersBot",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "dependencies": {
     "kue": "^0.8.11",
     "snoocore": "^2.7.1",

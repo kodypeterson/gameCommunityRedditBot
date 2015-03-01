@@ -17,7 +17,7 @@ jobs.process(JOB_TYPES.processMessage, function(job, done){
             var isValid = true;
             if (value.subject && job.data.data.subject.indexOf(value.subject) !== 0) isValid = false;
             if (value.body && job.data.data.body !== value.body) isValid = false;
-            if (value.allowedAuthors && value.allowedAuthors.indexOf(job.data.data.author) === -1) {
+            if (isValid && value.allowedAuthors && value.allowedAuthors.indexOf(job.data.data.author) === -1) {
                 isValid = false;
                 secruityViolation = true;
                 return false;
