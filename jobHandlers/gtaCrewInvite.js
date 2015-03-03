@@ -35,7 +35,7 @@ jobs.process(JOB_TYPES.gtaCrewInvite, function(job, done){
                 });
             }).then(function(contents){
                 var body = JSON.parse(contents[1]);
-                if (gamertag.toLowerCase() === body.MatchedUsers[0].UserName.toLowerCase()) {
+                if (body.MatchedUsers.length > 0 && gamertag.toLowerCase() === body.MatchedUsers[0].UserName.toLowerCase()) {
                     if (recruitData === null) {
                         recruitData = {
                             isFake: true
@@ -129,7 +129,7 @@ jobs.process(JOB_TYPES.gtaCrewInvite, function(job, done){
                         }
                     }
                 }
-                done(0);
+                done();
             });
         });
     });
