@@ -21,5 +21,8 @@
     ],
     "2.0.4": [
         "Fix issue where no search results from Social Club results in job not being able to complete and no error sent"
+    ],
+    "2.0.5": [
+        "Kick bot, GTA invites seem stuck... (No real changes)"    
     ]
 }
